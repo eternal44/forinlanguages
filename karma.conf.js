@@ -19,7 +19,7 @@ module.exports = function(config) {
       'client/lib/angular-mocks/angular-mocks.js',
       'client/lib/angular-ui-router/release/angular-ui-router.min.js',
       'client/lib/underscore/underscore-min.js',
-      'client/app/**/*.js',
+      'client/**/*.js',
       'specs/client/smokeTest.js'
     ],
 
