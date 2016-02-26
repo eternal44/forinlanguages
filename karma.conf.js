@@ -15,15 +15,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './client/lib/angular/angular.js',
-      './client/lib/angular-ui-router/release/angular-ui-router.min.js',
-      './client/app/application.js',
+      'client/lib/angular/angular.js',
+      'client/lib/angular-mocks/angular-mocks.js',
+      'client/lib/angular-ui-router/release/angular-ui-router.min.js',
+      'client/**/*.js',
       'specs/**/*.js'
     ],
 
 
     // list of files to exclude
     exclude: [
+      'client/lib/FileSaver/index.js'
     ],
 
 
