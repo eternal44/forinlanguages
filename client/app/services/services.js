@@ -1,7 +1,7 @@
 angular.module('forinlanguages.services', [
   'ui.router'])
 
-.factory('PeerFactory', function($localForage) {
+.factory('PeerFactory', function() {
 
   var makePeer = function(cb) {
     var newurl;
@@ -60,7 +60,7 @@ angular.module('forinlanguages.services', [
     }
 
     var storeItem = function(prev, last) {
-      $localForage.setItem(Math.floor((prev + chunkSize)/chunkSize) + "SENT" + meta.name, data.slice(prev, prev + chunkSize))
+      localForage.setItem(Math.floor((prev + chunkSize)/chunkSize) + "SENT" + meta.name, data.slice(prev, prev + chunkSize))
       .then(function(item) {
         // Send the chunk right after chunking it
         for(var x in peers) {
@@ -75,7 +75,7 @@ angular.module('forinlanguages.services', [
       .then(function() {
         if((meta.size - (prev + chunkSize)) < chunkSize) {
           // If we're on the last chunk, save it
-          $localForage.setItem(Math.ceil(meta.size/chunkSize) + '-LAST' + "SENT" + meta.name, data.slice(prev + chunkSize, meta.size))
+          localForage.setItem(Math.ceil(meta.size/chunkSize) + '-LAST' + "SENT" + meta.name, data.slice(prev + chunkSize, meta.size))
           .then(function(lastItem) {
             // Trigger the callback because we're finished
             // debugger;

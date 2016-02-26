@@ -1,6 +1,6 @@
 angular.module('forinlanguages', [
   'file-model',
-  'LocalForageModule',
+  // 'LocalForageModule',
   'forinlanguages.services',
   'forinlanguages.peer'
 ])

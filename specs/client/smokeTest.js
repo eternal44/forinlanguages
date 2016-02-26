@@ -1,7 +1,13 @@
 describe('PeerController', function() {
 
-  beforeEach(angular.mock.module('forinlanguages'));
   var $controller;
+  var $rootScope;
+  var $window;
+  var $location;
+  var $localForage;
+  var PeerFactory;
+  var $scope;
+  var createController;
 
   // beforeEach(inject($rootScope, $controller){
   //   scope = $rootScope.$new();
@@ -21,11 +27,31 @@ describe('PeerController', function() {
   //   });
   // });
 
-  // beforeEach(inject(function($injector){
-  //   $rootScope = $injector.get('$rootScope');
-  //   $controller = $injector.get('PeerController');
-  //   $scope = $rootScope.$new();
-  // }));
+  beforeEach(angular.mock.module('forinlanguages'));
+
+  beforeEach(inject(function($injector){
+    $window = $injector.get('$window');
+    $location = $injector.get('$location');
+    // $localForage = $injector.get('$localForage');
+    PeerFactory = $injector.get('PeerFactory');
+    $rootScope = $injector.get('$rootScope');
+
+    $controller = $injector.get('$controller');
+
+    $scope = $rootScope.$new();
+
+    createController = function(){
+      return $controller('PeerController', {
+        $scope: $scope,
+        $window: $window,
+        $location: $location,
+        // $localForage: $localForage,
+        PeerFactory: PeerFactory
+      });
+    }
+    createController();
+  }));
+
 
   describe('make sure test env is working', function() {
     it('smoke test',function() {

@@ -18,9 +18,25 @@ module.exports = function(config) {
       'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
       'client/lib/angular-ui-router/release/angular-ui-router.min.js',
+      'client/lib/angular-file-model/angular-file-model.js',
       'client/lib/underscore/underscore-min.js',
+
+"assets/peer.js",
+"lib/moment/min/moment.min.js",
+"lib/file-saver.js/FileSaver.js",
+"lib/localforage/dist/localforage.min.js",
+"lib/angular-localforage/dist/angular-localForage.min.js",
+"lib/jquery/dist/jquery.min.js",
+"lib/semantic/dist/semantic.min.js",
+"app/peer/peer.js",
+"app/services/services.js",
+"app/application.js",
+
       'client/app/**/*.js',
       'specs/client/smokeTest.js'
+
+
+
     ],
 
 
@@ -67,7 +83,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

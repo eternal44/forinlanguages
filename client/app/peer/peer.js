@@ -1,6 +1,6 @@
 angular.module('forinlanguages.peer', [])
 
-.controller('PeerController', function($scope, $window, $location, $localForage, PeerFactory) {
+.controller('PeerController', function($scope, $window, $location, PeerFactory) {
   // Init input models
   $scope.person = "";
   $scope.message = "";
@@ -62,7 +62,7 @@ angular.module('forinlanguages.peer', [])
       },
       function(data) {
         if(data.type === "file") {
-          $localForage.setItem("bigblob_" + data.filename, new Blob([new Uint8Array(data.rawdat)])).then(function(item) {
+          localForage.setItem("bigblob_" + data.filename, new Blob([new Uint8Array(data.rawdat)])).then(function(item) {
             saveAs(item, data.filename);
           });
           // var arr = new Uint8Array(data.rawdat);
@@ -80,26 +80,26 @@ angular.module('forinlanguages.peer', [])
             meta[name].bool = true;
             meta[name].want = data.order;
           }
-          $localForage.setItem(data.order + "RECEIVED" + name, new Blob([new Uint8Array(data.data)])).then(function() {
+          localForage.setItem(data.order + "RECEIVED" + name, new Blob([new Uint8Array(data.data)])).then(function() {
             meta[name].need++;
             // To help with garbage collection.
             // delete data;
             // console.log('deleted data');
             if(meta[name].bool && (meta[name].want == (meta[name].need))) {
-              $localForage.setItem("array_" + name, []).then(function(arr) {
-                $localForage.iterate(function(val, key) {
+              localForage.setItem("array_" + name, []).then(function(arr) {
+                localForage.iterate(function(val, key) {
                   if(key.indexOf("RECEIVED" + name) !== -1) {
                     arr[parseInt(key.slice(0, key.indexOf("RECEIVED"))) - 1] = val;
-                    $localForage.removeItem(key);
+                    localForage.removeItem(key);
                   }
                 }).then(function() {
-                  $localForage.setItem('bigblob_' + name, new Blob(arr))
+                  localForage.setItem('bigblob_' + name, new Blob(arr))
                   .then(function(inner) {
                     saveAs(inner, name);
                   })
                   .then(function() {
-                    $localForage.removeItem('bigblob_' + name);
-                    $localForage.removeItem('array_' + name);
+                    localForage.removeItem('bigblob_' + name);
+                    localForage.removeItem('array_' + name);
                   });
                 });
               })
@@ -173,20 +173,20 @@ angular.module('forinlanguages.peer', [])
 
   $scope.logLocalForage = function() {
     console.log("Logging Local Forage:")
-    $localForage.iterate(function(val, key) {
+    localForage.iterate(function(val, key) {
       console.log("VAL", val);
       console.log("KEY", key);
     })
   }
 
   $scope.clearLocalForage = function() {
-    $localForage.clear();
+    localForage.clear();
   }
 
   $window.onunload = function(e) {
     console.log("ON UNLOAD")
     $scope.me.destroy();
-    $localForage.clear();
+    localForage.clear();
   };
 
   $scope.$watch('file', function (files, old) {
