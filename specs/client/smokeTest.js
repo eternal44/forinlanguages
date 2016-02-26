@@ -2,16 +2,16 @@ describe('PeerController', function() {
   var $rootScope;
   var $controller;
 
-  beforeEach(module('forinlanguage'));
-  beforeEach(inject(function($injector){
-    $rootScope = $injector.get('$rootScope');
-    $controller = $injector.get('PeerController');
-    $scope = $rootScope.$new();
-  }));
+  // beforeEach(module('forinlanguage'));
+  // beforeEach(inject(function($injector){
+  //   $rootScope = $injector.get('$rootScope');
+  //   $controller = $injector.get('PeerController');
+  //   $scope = $rootScope.$new();
+  // }));
 
-  beforeEach(inject(function($controller){
-    PeerController = $controller("PeerController");
-  }));
+  // beforeEach(inject(function($controller){
+  //   PeerController = $controller("PeerController");
+  // }));
 
   describe('make sure test env is working', function() {
     it('smoke test',function() {

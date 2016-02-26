@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine','browserify'],
 
 
     // list of files / patterns to load in the browser
@@ -18,8 +18,9 @@ module.exports = function(config) {
       'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
       'client/lib/angular-ui-router/release/angular-ui-router.min.js',
-      'client/**/*.js',
-      'specs/**/*.js'
+      'client/lib/underscore/underscore-min.js',
+      'client/app/**/*.js',
+      'specs/client/smokeTest.js'
     ],
 
 
@@ -32,6 +33,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'specs/**/*.js': ['browserify']
+    },
+
+    browserify: {
+      debug: true,
+      transform: ['brfs']
     },
 
 
@@ -60,7 +67,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
